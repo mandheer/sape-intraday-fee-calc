@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        SPRING_BOOT_VERSION = '2.0.5.RELEASE'
+        SPRING_GRADLE_DEP_MAN_VERSION = '1.0.6.RELEASE'
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${SPRING_BOOT_VERSION}"
+        classpath "io.spring.gradle:dependency-management-plugin:${SPRING_GRADLE_DEP_MAN_VERSION}"
+
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'sape-intraday-fee-calc'
+    version =  '0.0.1'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://maven.springframework.org/release"
+    }
+    jcenter()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    LOGBACK_VERSION='1.1.8'
+    JUNIT_VERSION = '5.11'
+    TEST_VERSION = '6.8.5'
+    SPRING_BOOT_VERSION = '2.0.5.RELEASE'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-batch")
+    compile "ch.qos.logback:logback-classic"
+    compile("org.hsqldb:hsqldb")
+    testCompile("junit:junit")
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.4.0')
+//    classpath("junit:junit:${JUNIT_VERSION}")
+//    testCompile("org.testing:testing:${TEST_VERSION}")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+//    classpath("org.springframework.boot:spring-boot-starter-test:${SPRING_BOOT_VERSION}")
+}
+
